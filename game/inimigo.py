@@ -1,12 +1,14 @@
 import random
 
 class Inimigo:
-    def __init__(self, nome, vida, ataque, defesa):
+    def __init__(self, nome, vida, ataque, defesa, nivel):
         self.nome = nome
         self.vida = vida
         self.vida_maxima = vida
         self.ataque = ataque
         self.defesa = defesa
+        self.nivel = nivel
+        self.experiencia = 7 * nivel
 
     def atacar(self, personagem):
         """Calcula o dano ao atacar o jogador."""
@@ -26,4 +28,5 @@ class Inimigo:
         vida = random.randint(10, 20) + (fase * 2)
         ataque = random.randint(3, 6) + (fase * 1)
         defesa = random.randint(1, 3) + (fase // 2)
-        return Inimigo(nome, vida, ataque, defesa)
+        nivel = 1 + fase
+        return Inimigo(nome, vida, ataque, defesa, nivel)

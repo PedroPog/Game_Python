@@ -1,7 +1,9 @@
 import time
+from game.personagem import Personagem
+from game.inimigo import Inimigo
 
 class Batalha:
-    def __init__(self, personagem, inimigo):
+    def __init__(self, personagem=Personagem, inimigo=Inimigo):
         self.personagem = personagem
         self.inimigo = inimigo
 
@@ -14,6 +16,7 @@ class Batalha:
             self.personagem.atacar(self.inimigo)
             if not self.inimigo.esta_vivo():
                 print(f"🏆 {self.inimigo.nome} foi derrotado!")
+                self.personagem.ganhar_experiencia(self.inimigo.experiencia)
                 break  # Sai do loop
 
             # Turno do inimigo

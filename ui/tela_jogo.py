@@ -8,6 +8,9 @@ class TelaJogo:
     def __init__(self, root, novo=False, personagem=None):
         self.root = root
         self.root.title("RPG - Batalha")
+        self.root.geometry("400x300")
+        self.root.resizable(False, False)
+        
 
         if novo or personagem is None:
             self.jogador = Personagem(nome="Herói", classe="Guerreiro", vida=30, ataque=7, defesa=3)

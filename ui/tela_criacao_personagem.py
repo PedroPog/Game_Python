@@ -71,6 +71,7 @@ class TelaCriacaoPersonagem:
             nome=nome,
             classe=classe,
             vida=atributos["vida"],
+            vida_maxima=atributos["vida"],
             ataque=atributos["ataque"],
             defesa=atributos["defesa"]
         )
