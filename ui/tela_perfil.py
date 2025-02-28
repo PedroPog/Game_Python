@@ -1,11 +1,9 @@
 import tkinter as tk
 from tkinter import ttk
+
+
 from game.personagem import Personagem
-from game.fase import Fase
 from ui.tela_jogo import TelaJogo
-from utils.salvar_carregar import salvar_personagem
-from ui.tela_gameover import TelaGameOver
-from PIL import Image, ImageTk
 
 class TelaPerfil:
 
@@ -44,9 +42,10 @@ class TelaPerfil:
         lbl_nivel = tk.Label(self.root, text=f"Nível: {self.jogador.nivel}", font=("Arial", 10))
         lbl_nivel.pack()
 
-        self.exp_bar = ttk.Progressbar(self.root, orient="horizontal", length=self.jogador.experiencia_maximo,
-                                        mode="determinate", value=self.jogador.experiencia )
-        self.exp_bar.pack(pady=5)
+        self.exp_bar = ttk.Progressbar(self.root, orient="horizontal", length=200,
+                                        mode="determinate",maximum=self.jogador.experiencia_maximo,
+                                       value=self.jogador.experiencia )
+        self.exp_bar.pack(pady=5,padx=100)
         lbl_exp = tk.Label(self.root, text=f"Experiência: {self.jogador.experiencia}/{self.jogador.experiencia_maximo}")
         lbl_exp.pack()
 
