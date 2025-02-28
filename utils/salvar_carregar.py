@@ -21,16 +21,18 @@ else:
 
 fernet = Fernet(chave)
 
-def salvar_personagem(personagem):
+def salvar_personagem(personagem=Personagem):
     """Salva o personagem criptografado em um arquivo."""
     dados = {
         "nome": personagem.nome,
         "classe": personagem.classe,
         "vida": personagem.vida,
+        "vida_maxima": personagem.vida_maxima,
         "ataque": personagem.ataque,
         "defesa": personagem.defesa,
         "nivel": personagem.nivel,           # Adicionado
-        "experiencia": personagem.experiencia # Adicionado
+        "experiencia": personagem.experiencia, # Adicionado
+        "ponto_experiencia":personagem.ponto_experiencia
     }
     json_dados = json.dumps(dados).encode()
     dados_criptografados = fernet.encrypt(json_dados)

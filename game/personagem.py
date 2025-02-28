@@ -1,15 +1,15 @@
 class Personagem:
-    def __init__(self, nome, classe, vida, vida_maxima, ataque, defesa, nivel=1, experiencia=0):
+    def __init__(self, nome, classe, vida, vida_maxima, ataque, defesa, nivel=1, experiencia=0, ponto_experiencia=0):
         self.nome = nome
         self.classe = classe
         self.vida = vida
-        self.vida_maxima = vida_maxima 
+        self.vida_maxima = vida_maxima
         self.ataque = ataque
         self.defesa = defesa
         self.nivel = nivel
         self.experiencia = experiencia
         self.experiencia_maximo = 100 * nivel
-        self.ponto_experiencia = 0
+        self.ponto_experiencia = ponto_experiencia
 
 
     def atacar(self, inimigo):
@@ -30,6 +30,9 @@ class Personagem:
             self.nivel += 1
             self.experiencia -= self.experiencia_maximo
             self.experiencia_maximo = 100 * self.nivel
+            self.vida += self.vida_maxima / 2 # Restaurar metade da vida maxima
+            if self.vida > self.vida_maxima:
+                self.vida_maxima = self.vida_maxima
             self.ponto_experiencia += 1
             print(f"{self.nome} subiu para o nível {self.nivel}!")
             # print(f"Nova experiência: {self.experiencia}/{self.experiencia_maximo}")

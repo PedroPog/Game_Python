@@ -2,17 +2,20 @@ import tkinter as tk
 from tkinter import ttk
 from game.personagem import Personagem
 from game.fase import Fase
+from ui.tela_jogo import TelaJogo
 from utils.salvar_carregar import salvar_personagem
 from ui.tela_gameover import TelaGameOver
 from PIL import Image, ImageTk
 
 class TelaPerfil:
-    def __init__(self, root, novo=False, personagem=Personagem):
+
+
+    def __init__(self, root, personagem=Personagem):
         self.root = root
         self.root.title("RPG - Perfil")
         self.root.geometry("500x400")
         self.root.resizable(False, False)
-        
+
         self.jogador = personagem
 
         # Carregar a imagem
@@ -57,7 +60,9 @@ class TelaPerfil:
         box_atributes = tk.Frame(self.root, bg="gray77", bd=2, relief="solid")
         box_atributes.pack(pady=15, padx=20, fill="both", expand=True)
 
-        tk.Label(box_atributes, text="Atributos", font=("Arial", 11, "bold"), bg="gray77").pack(pady=5)
+        tk.Label(box_atributes, text="Atributos", font=("Arial", 11, "bold"), bg="gray77").pack()
+        tk.Label(box_atributes, text=f"Pontos de Experiencia: {self.jogador.ponto_experiencia}", font=("Arial", 11, "bold"), bg="gray77").pack()
+        
 
         lbl_vida = tk.Label(box_atributes, text=f"Vida: {self.jogador.vida}", font=("Arial", 10), bg="gray77")
         lbl_vida.pack(pady=2)
@@ -67,6 +72,17 @@ class TelaPerfil:
 
         lbl_defesa = tk.Label(box_atributes, text=f"Defesa: {self.jogador.defesa}", font=("Arial", 10), bg="gray77")
         lbl_defesa.pack(pady=2)
+
+        btn_nova_rodanda = tk.Button(root, text="Nova Rodanda", command=self.iniciar_fase)
+        btn_nova_rodanda.pack(pady=5)
+
+
+    def iniciar_fase(self):
+        self.root.destroy()  # Fecha a tela de criação
+        root_jogo = tk.Tk()
+        person = self.jogador
+        TelaJogo(root_jogo, personagem=person)# Inicia o jogo com o personagem criado
+        root_jogo.mainloop()
 
 
 # Testar a tela do jogo

@@ -23,7 +23,7 @@ class TelaJogo:
         self.lbl_fase = tk.Label(root, text=f"🔥 FASE {self.fase_atual} 🔥", font=("Arial", 16, "bold"))
         self.lbl_fase.pack(pady=10)
 
-        self.lbl_vida_jogador = tk.Label(root, text=f"Vida: {self.jogador.vida}", font=("Arial", 14))
+        self.lbl_vida_jogador = tk.Label(root, text=f"Vida: {self.jogador.vida}//{self.jogador.vida_maxima} ", font=("Arial", 14))
         self.lbl_vida_jogador.pack()
 
         self.lbl_status = tk.Label(root, text="", font=("Arial", 12))
@@ -39,7 +39,7 @@ class TelaJogo:
         vivo = fase.iniciar()
 
         # Atualizar vida do jogador na interface
-        self.lbl_vida_jogador.config(text=f"Vida: {self.jogador.vida}")
+        self.lbl_vida_jogador.config(text=f"Vida: {self.jogador.vida}//{self.jogador.vida_maxima}")
 
         if not vivo:
             self.game_over()

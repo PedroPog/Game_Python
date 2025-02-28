@@ -28,5 +28,5 @@ class Inimigo:
         vida = random.randint(10, 20) + (fase * 2)
         ataque = random.randint(3, 6) + (fase * 1)
         defesa = random.randint(1, 3) + (fase // 2)
-        nivel = 1 + fase
+        nivel = fase
         return Inimigo(nome, vida, ataque, defesa, nivel)
