@@ -1,22 +1,18 @@
 import tkinter as tk
 from game.personagem import Personagem
 from game.fase import Fase
+from ui.tela_combat import TelaCombate
 from utils.salvar_carregar import salvar_personagem
 from ui.tela_gameover import TelaGameOver
 
 class TelaJogo:
-    def __init__(self, root, novo=False, personagem=None):
+    def __init__(self, root, personagem=Personagem):
         self.root = root
         self.root.title("RPG - Batalha")
         self.root.geometry("400x300")
         self.root.resizable(False, False)
-        
 
-        if novo or personagem is None:
-            self.jogador = Personagem(nome="Herói", classe="Guerreiro", vida=30, ataque=7, defesa=3)
-        else:
-            self.jogador = personagem
-
+        self.jogador = personagem
         self.fase_atual = 1
 
         # Labels
@@ -30,17 +26,16 @@ class TelaJogo:
         self.lbl_status.pack()
 
         # Botão de ataque
-        self.btn_atacar = tk.Button(root, text="Atacar", font=("Arial", 14), command=self.iniciar_fase)
+        self.btn_atacar = tk.Button(root, text="Encontrar Monstro", font=("Arial", 14), command=self.iniciar_fase)
         self.btn_atacar.pack(pady=10)
 
     def iniciar_fase(self):
-        """Inicia a batalha e verifica se o jogador sobreviveu."""
-        fase = Fase(self.fase_atual, self.jogador)
-        vivo = fase.iniciar()
+        # Cria a tela de combate e inicia a batalha
+        root_combate = tk.Toplevel(self.root)
+        combate = TelaCombate(root_combate, self.fase_atual, self.jogador)
+        vivo = combate.iniciar_batalha()
 
-        # Atualizar vida do jogador na interface
         self.lbl_vida_jogador.config(text=f"Vida: {self.jogador.vida}//{self.jogador.vida_maxima}")
-
         if not vivo:
             self.game_over()
         else:
@@ -58,5 +53,5 @@ class TelaJogo:
 # Testar a tela do jogo
 if __name__ == "__main__":
     root = tk.Tk()
-    TelaJogo(root, novo=True)
+    TelaJogo(root)
     root.mainloop()
